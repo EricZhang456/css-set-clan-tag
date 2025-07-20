@@ -1,0 +1,11 @@
+"Phrases"
+{
+    "CS_SET_CLAN_TAG_SET"
+    {
+        "en"    "Changed clan tag to: %s"
+    }
+    "CS_SET_CLAN_TAG_EMPTY"
+    {
+        "en"    "Clan tag must not be empty."
+    }
+}
