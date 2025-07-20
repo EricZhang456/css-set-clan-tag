@@ -10,6 +10,6 @@
     }
     "CS_SET_CLAN_TAG_UNSET"
     {
-        "en"    "Clan tag unset. Change will take effect on map change."
+        "en"    "Clan tag unset. Rejoin the server to apply this change."
     }
 }
