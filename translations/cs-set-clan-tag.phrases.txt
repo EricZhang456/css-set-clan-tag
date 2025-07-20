@@ -8,4 +8,8 @@
     {
         "en"    "Clan tag must not be empty."
     }
+    "CS_SET_CLAN_TAG_UNSET"
+    {
+        "en"    "Clan tag unset. Change will take effect on map change."
+    }
 }

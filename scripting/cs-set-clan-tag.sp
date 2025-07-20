@@ -2,6 +2,8 @@
 #include <clientprefs>
 #include <cstrike>
 
+#define BASE_STR_LEN 128
+
 public Plugin myinfo = {
     name = "CS Set Clan Tag",
     author = "Eric Zhang",
@@ -13,7 +15,7 @@ public Plugin myinfo = {
 Cookie g_cClanTag;
 
 public APLRes AskPluginLoad2(Handle myself, bool late, char[] error, int err_max) {
-    char game[128];
+    char game[BASE_STR_LEN];
     GetGameFolderName(game, sizeof(game));
     if (StrEqual(game, "cstrike") || StrEqual(game, "csgo")) {
         return APLRes_Success;
@@ -25,13 +27,17 @@ public APLRes AskPluginLoad2(Handle myself, bool late, char[] error, int err_max
 public void OnPluginStart() {
     LoadTranslations("cs-set-clan-tag.phrases");
     g_cClanTag = new Cookie("cs_custom_clantag", "Custom clan tag", CookieAccess_Protected);
-    RegConsoleCmd("sm_setclantag", Cmd_SetClanTag, "Set clan tag");
+    RegConsoleCmd("sm_setclantag", Cmd_SetClanTag, "Set custom clan tag");
+    RegConsoleCmd("sm_unsetclantag", Cmd_UnsetClanTag, "Unset custom clan tag");
     HookEvent("player_team", Event_PlayerTeam);
 }
 
 public void Event_PlayerTeam(Event event, const char[] name, bool dontBroadcast) {
     int client = GetClientOfUserId(event.GetInt("userid"));
-    char clanTag[128];
+    char clanTag[BASE_STR_LEN];
+    if (!AreClientCookiesCached(client)) {
+        return;
+    }
     g_cClanTag.Get(client, clanTag, sizeof(clanTag));
     if (!StrEqual(clanTag, "")) {
         CS_SetClientClanTag(client, clanTag);
@@ -39,7 +45,7 @@ public void Event_PlayerTeam(Event event, const char[] name, bool dontBroadcast)
 }
 
 public Action Cmd_SetClanTag(int client, int args) {
-    char clanTag[128];
+    char clanTag[BASE_STR_LEN];
     GetCmdArg(1, clanTag, sizeof(clanTag));
     if (StrEqual(clanTag, "")) {
         ReplyToCommand(client, "%t", "CS_SET_CLAN_TAG_EMPTY");
@@ -48,5 +54,11 @@ public Action Cmd_SetClanTag(int client, int args) {
     g_cClanTag.Set(client, clanTag);
     CS_SetClientClanTag(client, clanTag);
     ReplyToCommand(client, "%t", "CS_SET_CLAN_TAG_SET", clanTag);
+    return Plugin_Handled;
+}
+
+public Action Cmd_UnsetClanTag(int client, int args) {
+    g_cClanTag.Set(client, "");
+    ReplyToCommand(client, "%t", "CS_SET_CLAN_TAG_UNSET");
     return Plugin_Handled;
 }

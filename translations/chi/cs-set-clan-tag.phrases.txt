@@ -6,6 +6,10 @@
     }
     "CS_SET_CLAN_TAG_EMPTY"
     {
-        "en"    "战队名称不能为空。"
+        "chi"    "战队名称不能为空。"
+    }
+    "CS_SET_CLAN_TAG_UNSET"
+    {
+        "chi"    "已重置战队名称。加载下一张地图时会应用更变。"
     }
 }
