@@ -45,6 +45,9 @@ public void Event_PlayerTeam(Event event, const char[] name, bool dontBroadcast)
 }
 
 public Action Cmd_SetClanTag(int client, int args) {
+    if (client <= 0) {
+        return Plugin_Continue;
+    }
     char clanTag[BASE_STR_LEN];
     GetCmdArg(1, clanTag, sizeof(clanTag));
     if (StrEqual(clanTag, "")) {
@@ -58,6 +61,9 @@ public Action Cmd_SetClanTag(int client, int args) {
 }
 
 public Action Cmd_UnsetClanTag(int client, int args) {
+    if (client <= 0) {
+        return Plugin_Continue;
+    }
     g_cClanTag.Set(client, "");
     ReplyToCommand(client, "%t", "CS_SET_CLAN_TAG_UNSET");
     return Plugin_Handled;
