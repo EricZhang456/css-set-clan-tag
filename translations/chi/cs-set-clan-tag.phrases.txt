@@ -1,0 +1,11 @@
+"Phrases"
+{
+    "CS_SET_CLAN_TAG_SET"
+    {
+        "chi"    "更改战队名称为：%s"
+    }
+    "CS_SET_CLAN_TAG_EMPTY"
+    {
+        "en"    "战队名称不能为空。"
+    }
+}
