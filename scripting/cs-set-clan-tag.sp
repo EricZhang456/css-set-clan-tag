@@ -49,7 +49,7 @@ public Action Cmd_SetClanTag(int client, int args) {
         return Plugin_Continue;
     }
     char clanTag[BASE_STR_LEN];
-    GetCmdArg(1, clanTag, sizeof(clanTag));
+    GetCmdArgString(clanTag, sizeof(clanTag));
     if (StrEqual(clanTag, "")) {
         ReplyToCommand(client, "%t", "CS_SET_CLAN_TAG_EMPTY");
         return Plugin_Handled;
