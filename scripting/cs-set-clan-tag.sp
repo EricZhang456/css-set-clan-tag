@@ -34,12 +34,12 @@ public void OnPluginStart() {
 
 public void Event_PlayerTeam(Event event, const char[] name, bool dontBroadcast) {
     int client = GetClientOfUserId(event.GetInt("userid"));
-    char clanTag[BASE_STR_LEN];
     if (!AreClientCookiesCached(client)) {
         return;
     }
+    char clanTag[BASE_STR_LEN];
     g_cClanTag.Get(client, clanTag, sizeof(clanTag));
-    if (!StrEqual(clanTag, "")) {
+    if (!strlen(clanTag)) {
         CS_SetClientClanTag(client, clanTag);
     }
 }
