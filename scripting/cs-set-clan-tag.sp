@@ -39,7 +39,7 @@ public void Event_PlayerSpawn(Event event, const char[] name, bool dontBroadcast
     }
     char clanTag[BASE_STR_LEN];
     g_cClanTag.Get(client, clanTag, sizeof(clanTag));
-    if (!strlen(clanTag)) {
+    if (strlen(clanTag)) {
         CS_SetClientClanTag(client, clanTag);
     }
 }
