@@ -29,7 +29,7 @@ public void OnPluginStart() {
     g_cClanTag = new Cookie("cs_custom_clantag", "Custom clan tag", CookieAccess_Protected);
     RegConsoleCmd("sm_setclantag", Cmd_SetClanTag, "Set custom clan tag");
     RegConsoleCmd("sm_unsetclantag", Cmd_UnsetClanTag, "Unset custom clan tag");
-    HookEvent("player_spaen", Event_PlayerSpawn);
+    HookEvent("player_spawn", Event_PlayerSpawn);
 }
 
 public void Event_PlayerSpawn(Event event, const char[] name, bool dontBroadcast) {
