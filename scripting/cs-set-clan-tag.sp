@@ -29,10 +29,10 @@ public void OnPluginStart() {
     g_cClanTag = new Cookie("cs_custom_clantag", "Custom clan tag", CookieAccess_Protected);
     RegConsoleCmd("sm_setclantag", Cmd_SetClanTag, "Set custom clan tag");
     RegConsoleCmd("sm_unsetclantag", Cmd_UnsetClanTag, "Unset custom clan tag");
-    HookEvent("player_team", Event_PlayerTeam);
+    HookEvent("player_spaen", Event_PlayerSpawn);
 }
 
-public void Event_PlayerTeam(Event event, const char[] name, bool dontBroadcast) {
+public void Event_PlayerSpawn(Event event, const char[] name, bool dontBroadcast) {
     int client = GetClientOfUserId(event.GetInt("userid"));
     if (!AreClientCookiesCached(client)) {
         return;
